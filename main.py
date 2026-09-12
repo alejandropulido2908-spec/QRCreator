@@ -43,7 +43,7 @@ async def generar_exportacion(url: str, formato: str, ruta_guardado: str):
             
         await browser.close()
 
-def main(page: ft.Page):
+async def main(page: ft.Page):
     page.title = "Generador de CV y Código QR"
     page.window.width = 520
     page.window.height = 740
@@ -137,7 +137,7 @@ def main(page: ft.Page):
             page.update()
 
     # Función para guardar el QR con el nombre personalizado elegible
-    def descargar_qr_personalizado(e):
+    async def descargar_qr_personalizado(e):
         if os.path.exists(ruta_qr_temp):
             nombre_limpio = txt_nombre_qr.value.strip() or "codigo_qr"
             if not nombre_limpio.endswith(".png"):
@@ -170,5 +170,6 @@ def main(page: ft.Page):
         )
     )
 
+# ✅ SINTAXIS MODERNA (Flet 0.80+)
 if __name__ == "__main__":
-    ft.app(target=main)
+    ft.run(main)
